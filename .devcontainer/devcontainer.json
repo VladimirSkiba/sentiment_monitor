@@ -1,0 +1,23 @@
+{
+  "name": "Sentiment мsentiment monitor Project",
+  
+  "dockerComposeFile": "../docker-compose.yml",
+  
+  "service": "sentiment_monitor",
+  
+  "workspaceFolder": "/app",
+  
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python"
+      }
+    }
+  },
+  
+  "remoteUser": "root"
+}

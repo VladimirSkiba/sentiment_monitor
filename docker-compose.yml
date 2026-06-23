@@ -5,7 +5,6 @@ services:
     ports:
       - "8000:8000"
     volumes:
-    volumes:
       - ./logs:/app/logs
       - ./models:/app/models
       - ./reports:/app/reports
