@@ -87,13 +87,13 @@ def main():
         label = random.randint(0, 1)
         train_rows.append((make_review(label), label))
 
-    write_csv(os.path.join(OUT_DIR,"train.csv"), train_rows, ["id", "label"])
+    write_csv(os.path.join(OUT_DIR,"train.csv"), train_rows, ["text", "label"])
 
     test_rows = []
     for _ in range(60):
         label = random.randint(0, 1)
         test_rows.append((make_review(label), label))
-    write_csv(os.path.join(OUT_DIR,"tset.csv"), train_rows, ["id", "label"])
+    write_csv(os.path.join(OUT_DIR,"test.csv"), test_rows, ["text", "label"])
     
     stream_rows = []
     row_id = 1
@@ -103,18 +103,18 @@ def main():
             if day <= 5:
                 text = make_review(label)
             else:
-                drift_share = min(0.9, 0.3+(6 - day) *0.15)
+                drift_share = min(0.9, 0.3+(day-6) *0.15)
                 if random.random() < drift_share:
                     text = make_drift_review(label)
                 else:
                     text = make_review(label)
             stream_rows.append((row_id, day, text, label))
             row_id += 1
-        write_csv(
-            os.path.join(OUT_DIR, "production_stream.csv"),
-            stream_rows, 
-            ["id", "day", "text","true_label"]
-        )
+    write_csv(
+        os.path.join(OUT_DIR, "production_stream.csv"),
+        stream_rows, 
+        ["id", "day", "text","true_label"]
+    )
 
     print(f"train.csv: {len(train_rows)} строк")
     print(f"test.csv: {len(test_rows)} строк")
