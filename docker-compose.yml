@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  sentiment_monitor:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+    volumes:
+      - ./logs:/app/logs
+      - ./models:/app/models
+      - ./reports:/app/reports
+      - ./data:/app/data
